@@ -98,5 +98,12 @@ namespace RealWorldApp.Services
             var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/ShoppingCartItems/" + userId);
             return JsonConvert.DeserializeObject<List<ShoppingCartItem>>(response);
         }
+        public static async Task<TotalCartItem> GetTotalCartItems(int userId)
+        {
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("AccessToken", string.Empty));
+            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/ShoppingCartItems/TotalItems/" + userId);
+            return JsonConvert.DeserializeObject<TotalCartItem>(response);
+        }
     }
 }
