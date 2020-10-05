@@ -105,5 +105,13 @@ namespace RealWorldApp.Services
             var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/ShoppingCartItems/TotalItems/" + userId);
             return JsonConvert.DeserializeObject<TotalCartItem>(response);
         }
+        public static async Task<bool> ClearShoppingCart(int userId)
+        {
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("AccessToken", string.Empty));
+            var response = await httpClient.DeleteAsync(AppSettings.ApiUrl + "api/ShoppingCartItems/" + userId);
+            if (!response.IsSuccessStatusCode) return false;
+            return true;
+        }
     }
 }
