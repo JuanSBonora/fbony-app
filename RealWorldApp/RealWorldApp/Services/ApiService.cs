@@ -113,5 +113,15 @@ namespace RealWorldApp.Services
             if (!response.IsSuccessStatusCode) return false;
             return true;
         }
+        public async Task<OrderResponse> PlaceOrder(Order order)
+        {
+            var httpClient = new HttpClient();
+            var json = JsonConvert.SerializeObject(order);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("AccessToken", string.Empty));
+            var response = await httpClient.PostAsync(AppSettings.ApiUrl + "api/Orders", content);
+            var jsonResult = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<OrderResponse>(jsonResult);
+        }
     }
 }
