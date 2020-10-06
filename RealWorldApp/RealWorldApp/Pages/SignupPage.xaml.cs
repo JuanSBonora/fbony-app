@@ -21,7 +21,7 @@ namespace RealWorldApp.Pages
         {
             if (!EntPassword.Text.Equals(EntConfirmPassword.Text))
             {
-                await DisplayAlert("Contraseña no coincide", "Confirma tu contraseña", "Cancelar");
+                await DisplayAlert("Las Contraseñas no coincide", "Confirma tu contraseña", "Cancelar");
             }
             else
             {
@@ -29,12 +29,17 @@ namespace RealWorldApp.Pages
                 if (response)
                 {
                     await DisplayAlert("Hola", "Tu Cuenta ha sido Creada", "Aceptar");
+                    await Navigation.PushModalAsync(new LoginPage());
                 }
                 else
                 {
                     await DisplayAlert("Oops", "Algo salió mal", "Cancelar");
                 }
             }
+        }
+        private async void BtnLogin_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new LoginPage());
         }
     }
 }
