@@ -19,9 +19,9 @@ namespace RealWorldApp.Pages
         }
         private async void BtnSignUp_Clicked(object sender, EventArgs e)
         {
-            if (EntPassword.Text.Equals(EntConfirmPassword.Text))
+            if (!EntPassword.Text.Equals(EntConfirmPassword.Text))
             {
-                await DisplayAlert("Contraseña no conincide", "Confirma tu contraseña", "Cancelar");
+                await DisplayAlert("Contraseña no coincide", "Confirma tu contraseña", "Cancelar");
             }
             else
             {
