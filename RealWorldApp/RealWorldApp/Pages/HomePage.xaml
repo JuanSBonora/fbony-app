@@ -67,9 +67,12 @@
                                      Orientation="Vertical">
                             <Image Aspect="Fill"
                                    HeightRequest="150"
-                                   WidthRequest="150" />
-                            <Label TextColor="#000000" />
-                            <Label TextColor="#B00905" />
+                                   WidthRequest="150" 
+                                   Source="{Binding FullImageUrl}"/>
+                            <Label TextColor="#000000" 
+                                   Text="{Binding name}"/>
+                            <Label TextColor="#B00905" 
+                                   Text="{Binding price,StringFormat='${0}'}"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -93,7 +96,7 @@
                        Grid.Column="0"
                        Grid.RowSpan="4"
                        Grid.ColumnSpan="3"
-                       Source="banner.png"
+                       Source="bannerA.png"
                        Aspect="Fill" />
                 <StackLayout Orientation="Horizontal"
                              Grid.Row="1"
@@ -148,7 +151,7 @@
                 <Image Margin="0,15,0,0"
                        HorizontalOptions="CenterAndExpand"
                        VerticalOptions="CenterAndExpand"
-                       Source="kfc.png"
+                       Source="logof.png"
                        Aspect="AspectFit"
                        Grid.Row="0"
                        Grid.Column="1"
@@ -169,7 +172,7 @@
                             <ColumnDefinition Width="4*" />
                             <ColumnDefinition Width="6*" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="kfc.png"
+                        <Image Source="logof.png"
                                Margin="5"
                                VerticalOptions="Center" />
                         <StackLayout Grid.Column="1"
