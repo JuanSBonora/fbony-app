@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,11 +16,24 @@ namespace RealWorldApp.Pages
     public partial class HomePage : ContentPage
     {
         public ObservableCollection<PopularProduct> ProductsCollection;
+        public ObservableCollection<Category> CategoriesCollection;
         public HomePage()
         {
             InitializeComponent();
             ProductsCollection = new ObservableCollection<PopularProduct>();
+            CategoriesCollection = new ObservableCollection<Category>();
             GetPopularProducts();
+            GetCategories();
+        }
+
+        private async void GetCategories()
+        {
+            var categories = await ApiService.GetCategories();
+            foreach (var category in categories)
+            {
+                CategoriesCollection.Add(category);
+            }
+            CvCategories.ItemsSource = CategoriesCollection;
         }
 
         private async void GetPopularProducts()
@@ -42,6 +55,13 @@ namespace RealWorldApp.Pages
         {
             await SlMenu.TranslateTo(-250, 0, 400, Easing.Linear);
             GridOverlay.IsVisible = false;
+        }
+
+        private void TapLogout_Tapped(object sender, EventArgs e)
+        {
+            Preferences.Set("accessToken", string.Empty);
+            Preferences.Set("tokenExpirationTime", 0);
+            Application.Current.MainPage = new NavigationPage(new SignupPage());
         }
     }
 }
