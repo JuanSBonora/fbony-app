@@ -23,7 +23,6 @@ namespace RealWorldApp.Pages
             ProductByCategoryCollection = new ObservableCollection<ProductByCategory>();
             GetProducts(categoryId);
         }
-
         private async void GetProducts(int id)
         {
             var products = await ApiService.GetProductByCategory(id);
@@ -33,10 +32,17 @@ namespace RealWorldApp.Pages
             }
             CvProducts.ItemsSource = ProductByCategoryCollection;
         }
-
         private void TapBack_Tapped(object sender, EventArgs e)
         {
             Navigation.PopModalAsync();
+        }
+        private void CvProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var currentSelection = e.CurrentSelection.FirstOrDefault() as ProductByCategory;
+            if (currentSelection == null) return;
+            Navigation.PushModalAsync(new ProductDetailPage(currentSelection.id));
+            ((CollectionView)sender).SelectedItem = null;
+
         }
     }
 }
