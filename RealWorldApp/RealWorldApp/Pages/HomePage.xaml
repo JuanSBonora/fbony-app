@@ -22,7 +22,8 @@
                                FontSize="Medium" />
                         <CollectionView  x:Name="CvCategories"
                                          HeightRequest="130"
-                                         SelectionMode="Single">
+                                         SelectionMode="Single"
+                                         SelectionChanged="CvCategories_SelectionChanged">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal" />
                             </CollectionView.ItemsLayout>

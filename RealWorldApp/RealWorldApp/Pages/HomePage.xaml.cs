@@ -24,6 +24,7 @@ namespace RealWorldApp.Pages
             CategoriesCollection = new ObservableCollection<Category>();
             GetPopularProducts();
             GetCategories();
+            LblUserName.Text = Preferences.Get("userName", string.Empty);
         }
 
         private async void GetCategories()
@@ -62,6 +63,21 @@ namespace RealWorldApp.Pages
             Preferences.Set("accessToken", string.Empty);
             Preferences.Set("tokenExpirationTime", 0);
             Application.Current.MainPage = new NavigationPage(new SignupPage());
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            var response = await ApiService.GetTotalCartItems(Preferences.Get("userId", 0));
+            LblTotalItems.Text = response.totalItems.ToString();
+        }
+
+        private void CvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var currentSelection = e.CurrentSelection.FirstOrDefault() as Category;
+            if (currentSelection == null) return; 
+            Navigation.PushModalAsync(new ProductListPage(currentSelection.id,currentSelection.name));
+            ((CollectionView)sender).SelectedItem = null;
         }
     }
 }
