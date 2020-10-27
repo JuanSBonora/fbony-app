@@ -79,5 +79,13 @@ namespace RealWorldApp.Pages
             Navigation.PushModalAsync(new ProductListPage(currentSelection.id,currentSelection.name));
             ((CollectionView)sender).SelectedItem = null;
         }
+
+        private void CvProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var currentSelection = e.CurrentSelection.FirstOrDefault() as PopularProduct;
+            if (currentSelection == null) return;
+            Navigation.PushModalAsync(new ProductDetailPage(currentSelection.id));
+            ((CollectionView)sender).SelectedItem = null;
+        }
     }
 }

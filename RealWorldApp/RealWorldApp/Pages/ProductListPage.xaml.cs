@@ -42,7 +42,6 @@ namespace RealWorldApp.Pages
             if (currentSelection == null) return;
             Navigation.PushModalAsync(new ProductDetailPage(currentSelection.id));
             ((CollectionView)sender).SelectedItem = null;
-
         }
     }
 }

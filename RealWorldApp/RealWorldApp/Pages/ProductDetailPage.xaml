@@ -19,7 +19,7 @@
                            VerticalOptions="Start"
                            HorizontalOptions="Start">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="TapBack" />
+                            <TapGestureRecognizer x:Name="TapBack" Tapped="TapBack_Tapped"/>
                         </Image.GestureRecognizers>
                     </Image>
                 </Grid>
@@ -55,7 +55,7 @@
                     <Image HeightRequest="40"
                            Source="minus.png">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="TapDecrement" />
+                            <TapGestureRecognizer x:Name="TapDecrement" Tapped="TapDecrement_Tapped"/>
                         </Image.GestureRecognizers>
                     </Image>
                     <Label x:Name="LblQty"
@@ -66,7 +66,7 @@
                     <Image HeightRequest="40"
                            Source="plus.png">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="TapIncrement" />
+                            <TapGestureRecognizer x:Name="TapIncrement" Tapped="TapIncrement_Tapped"/>
                         </Image.GestureRecognizers>
                     </Image>
                 </StackLayout>
@@ -89,7 +89,8 @@
                             Text="Add To Cart"
                             HorizontalOptions="FillAndExpand"
                             BackgroundColor="#CE0B06"
-                            TextColor="White" />
+                            TextColor="White" 
+                            Clicked="BtnAddToCart_Clicked"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

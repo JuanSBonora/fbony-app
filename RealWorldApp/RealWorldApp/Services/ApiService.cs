@@ -81,7 +81,7 @@ namespace RealWorldApp.Services
             var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Products/PopularProducts");
             return JsonConvert.DeserializeObject<List<PopularProduct>>(response);
         }
-        public async Task<bool> AddItemsInCart(AddToCart addToCart)
+        public static async Task<bool> AddItemsInCart(AddToCart addToCart)
         {
             await TokenValidator.CheckTokenValidity();
             var httpClient = new HttpClient();
@@ -125,7 +125,7 @@ namespace RealWorldApp.Services
             if (!response.IsSuccessStatusCode) return false;
             return true;
         }
-        public async Task<OrderResponse> PlaceOrder(Order order)
+        public static async Task<OrderResponse> PlaceOrder(Order order)
         {
             await TokenValidator.CheckTokenValidity();
             var httpClient = new HttpClient();
