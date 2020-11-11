@@ -52,10 +52,9 @@ namespace RealWorldApp.Pages
             GridOverlay.IsVisible = true;
             await SlMenu.TranslateTo(0, 0, 400, Easing.Linear);
         }
-        private async void TapCloseMenu_Tapped(object seder, EventArgs e)
+        private void TapCloseMenu_Tapped(object seder, EventArgs e)
         {
-            await SlMenu.TranslateTo(-250, 0, 400, Easing.Linear);
-            GridOverlay.IsVisible = false;
+            CloseHamBurgerMenu();
         }
 
         private void TapLogout_Tapped(object sender, EventArgs e)
@@ -72,6 +71,16 @@ namespace RealWorldApp.Pages
             LblTotalItems.Text = response.totalItems.ToString();
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            CloseHamBurgerMenu();
+        }
+        private async void CloseHamBurgerMenu()
+        {
+            await SlMenu.TranslateTo(-250, 0, 400, Easing.Linear);
+            GridOverlay.IsVisible = false;
+        }
         private void CvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var currentSelection = e.CurrentSelection.FirstOrDefault() as Category;
@@ -91,6 +100,11 @@ namespace RealWorldApp.Pages
         private void TapCartIcon_Tapped(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new CartPage());
+        }
+
+        private void TapOrders_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new OrdersPage());
         }
     }
 }
